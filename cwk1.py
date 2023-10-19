@@ -7,6 +7,13 @@ Introduction to Programming Coursework 1
 
 def valid_puzzle(puzzle: list) -> bool:
     # delete this line and pass to write your code here
+    base = len(puzzle[0])
+    for i in range(1,10):
+        if len(puzzle[i]) != base:
+            return False
+        elif len(puzzle) != 11:
+            return False
+        return True
     pass
 
 
