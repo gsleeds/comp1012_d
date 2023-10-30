@@ -1,7 +1,7 @@
 """
 Introduction to Programming Coursework 1
 
-@author:
+@author: Gabe Saban
 """
 
 
@@ -11,31 +11,82 @@ def valid_puzzle(puzzle: list) -> bool:
     for i in range(1,10):
         if len(puzzle[i]) != base:
             return False
-        elif len(puzzle) != 11:
+        elif type(puzzle) != list:
             return False
         return True
     pass
 
-
 def similarity_grouping(data: list) -> list:
     # delete this line and pass to write your code here
-    pass
-
+    fList=[]
+    for i in data:
+        found = False
+        for sublist in fList:
+            if i in sublist:
+                sublist.append(i)
+                found = True
+        if found is False:
+            fList.append([i])
+    return fList
 
 def highest_count_items(data: str) -> list:
-    # delete this line and pass to write your code here
-    pass
+    fList = []
+    if type(data) != str:
+        return fList
+    data=data.replace(" ","")
+    cList=(data.split(","))
+    ##print(cList)
 
+    frequency = {}
+
+    for item in cList:
+        if item in frequency:
+            frequency[item] += 1
+        else:
+            frequency[item] = 1
+    
+    maxfrequency = max(frequency.values())
+    maxitems = []
+
+    for item, frequency in frequency.items():
+        if frequency == maxfrequency:
+            maxitems.append([item, maxfrequency])
+
+    return(maxitems)
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
-    # delete this line and pass to write your code here
-    pass
-
+    g = True
+    for item in popList:
+        for i in range(len(item)):
+            if isinstance(charSet, str):
+                if any(char in item for char in charSet):
+                    g = False
+            elif isinstance(charSet, list):
+                if all(item[i] != char for char in charSet):
+                    g = False
+    
+    if g is True:
+        return(True)
+    else:
+        return False
 
 def total_price(unit: int) -> float:
-    # delete this line and pass to write your code here
-    pass
-
+    if unit<6:
+        return(unit*1.25)
+    else:
+        remainder=unit%6
+        if remainder==0:
+            value=unit/6
+            cost=value*5
+        else:
+            a=remainder*1.25
+            unit=unit-remainder
+            b=(unit/6)*5
+            cost=(a+b)
+        if cost > 20:
+            return(cost*0.9)
+        else:
+            return(cost)
 
 if __name__ == "__main__":
     # sample test for task 1.1
@@ -92,10 +143,12 @@ if __name__ == "__main__":
     popList2 = ['aac', 'ctt', 'gat', 'ccc', 'gcc', 'ctg', 'gtc', 'tcg',
                 'ccg', 'cca', 'ata']
     popList3 = ['aac', 'ctt', 'gat', 'ccc', 'gcc', 'ctg', 'gtc']
+
     charSet1 = ['0', '1']
     charSet2 = ['a', 'c', 't', 'g']
     charSet3 = ['a', 'c']
     charSet4 = '01'
+
     print(valid_char_in_string(popList1, charSet1))
     print(valid_char_in_string(popList2, charSet2))
     print(valid_char_in_string(popList3, charSet3))
